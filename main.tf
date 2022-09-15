@@ -137,7 +137,7 @@ resource "google_container_node_pool" "node_pool" {
 
   autoscaling {
     min_node_count = "1"
-    max_node_count = "5"
+    max_node_count = "3"
   }
 
   management {
@@ -147,7 +147,7 @@ resource "google_container_node_pool" "node_pool" {
 
   node_config {
     image_type   = "COS"
-    machine_type = "n1-standard-1"
+    machine_type = "2-standard-4"
 
     labels = {
       all-pools-example = "true"

@@ -99,11 +99,11 @@ resource "google_container_node_pool" "node_pool" {
   location = var.location
   cluster  = module.gke_cluster.name
 
-  initial_node_count = "1"
+  initial_node_count = "2"
 
   autoscaling {
     min_node_count = "1"
-    max_node_count = "5"
+    max_node_count = "3"
   }
 
   management {
@@ -112,7 +112,7 @@ resource "google_container_node_pool" "node_pool" {
   }
 
   node_config {
-    image_type   = "COS"
+    image_type   = "COS_CONTAINERD"
     machine_type = "n1-standard-1"
 
     labels = {

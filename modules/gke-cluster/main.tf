@@ -21,6 +21,20 @@ locals {
 # We want to make a cluster with no node pools, and manage them all with the fine-grained google_container_node_pool resource
 # ---------------------------------------------------------------------------------------------------------------------
 
+resource "google_project_service" "project" {
+  project = var.project
+  service = "container.googleapis.com"
+
+  timeouts {
+    create = "30m"
+    update = "40m"
+  }
+
+  disable_dependent_services = true
+}
+
+
+
 resource "google_container_cluster" "cluster" {
   provider = google-beta
 
@@ -168,6 +182,9 @@ resource "google_container_cluster" "cluster" {
   }
 
   resource_labels = var.resource_labels
+  depends_on = [
+    google_project_service.project
+  ]
 }
 
 # ---------------------------------------------------------------------------------------------------------------------
